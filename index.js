@@ -4,25 +4,23 @@
 //const apiKey = "47cpKe28N0zP9QP2YJtAgmNiiQCdVicOMrk3f295";
 const searchURL = "https://api.covidtracking.com";
 
-function formatQueryParams(query) {
-  console.log(query);
+function formatQueryParams(searchTerm) {
+  console.log(searchTerm);
+  //   const stateArr = searchTerm.map();
 }
 
 function displayResults(responseJson) {
-  // if there are previous results, remove them
-  for (let i = 0; i < responseJson.data.length; i++) {
-    $("#results-list").append(
-      `<li>${responseJson.data[i].positive}</li>
-        <li>${responseJson.data[i].negative}</li>
-        <li>${responseJson.data[i].deathConfirmed}</li>
+  $("#results-list").append(
+    `<li><p>Positive Test Results:</p>${responseJson.positive}</li>
+        <li><p>Negative Test Results:</p>${responseJson.negative}</li>
+        <li><p>Confirmed Deaths:</p>${responseJson.deathConfirmed}</li>
         `
-    );
-  }
-  // iterate through the items array
-
-  $("#results").removeClass("hidden");
-  console.log(responseJson);
+  );
 }
+
+// iterate through the items array
+
+$("#results").removeClass("hidden");
 
 function getData(searchTerm) {
   const queryString = formatQueryParams(searchTerm);
@@ -37,7 +35,9 @@ function getData(searchTerm) {
     })
     .then((responseJson) => displayResults(responseJson))
     .catch((err) => {
-      $("#js-error-message").text(`Something went wrong: ${err.message}`);
+      $("#js-error-message").text(
+        `Enter state code, example: MN or mn ${err.message}`
+      );
     });
 }
 
