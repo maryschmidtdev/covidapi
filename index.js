@@ -10,10 +10,17 @@ function formatQueryParams(query) {
 
 function displayResults(responseJson) {
   // if there are previous results, remove them
-
+  for (let i = 0; i < responseJson.data.length; i++) {
+    $("#results-list").append(
+      `<li>${responseJson.data[i].positive}</li>
+        <li>${responseJson.data[i].negative}</li>
+        <li>${responseJson.data[i].deathConfirmed}</li>
+        `
+    );
+  }
   // iterate through the items array
 
-  //$("#results").removeClass("hidden");
+  $("#results").removeClass("hidden");
   console.log(responseJson);
 }
 
