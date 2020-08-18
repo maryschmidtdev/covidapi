@@ -8,25 +8,18 @@ function formatQueryParams(query) {
   console.log(query);
 }
 
-// function displayResults(responseJson) {
-//   // if there are previous results, remove them
+function displayResults(responseJson) {
+  // if there are previous results, remove them
 
-//   // iterate through the items array
-//   for (let i = 0; i < responseJson.data.length; i++) {
-//     $("#results-list").append(
-//       `<li><h3>${responseJson.data[i].fullName}</h3></li>
-//       <li>${responseJson.data[i].description}</li>
-//       <li><a href = ${responseJson.data[i].url}>${responseJson.data[i].url}</a></li>
-//       `
-//     );
-//   }
+  // iterate through the items array
 
-//   $("#results").removeClass("hidden");
-// }
+  //$("#results").removeClass("hidden");
+  console.log(responseJson);
+}
 
-function getData(query) {
-  const queryString = formatQueryParams(query);
-  const url = searchURL;
+function getData(searchTerm) {
+  const queryString = formatQueryParams(searchTerm);
+  const url = searchURL + "/v1/states/" + searchTerm + "/current.json";
 
   fetch(url)
     .then((response) => {
