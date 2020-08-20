@@ -10,18 +10,16 @@
   </head>
 
   <body>
-    <div class="dropdown">
-      <h1>Covid Tracking</h1>
+    <h1>Covid Tracking</h1>
 
+    <div class="container">
+      <h2>US confirmed cases:</h2>
+      <h2>US confirmed deaths:</h2>
+    </div>
+
+    <div class="dropdown">
       <form id="js-form">
-        <h2>Choose a state:</h2>
-        <button
-          class="btn btn-primary dropdown-toggle"
-          type="button"
-          data-toggle="dropdown"
-        >
-          <span class="caret"></span>
-        </button>
+        <h2>Choose a US State or Territory:</h2>
         <select id="js-search-term">
           <option value="AL">AL</option>
           <option value="AK">AK</option>
@@ -74,6 +72,12 @@
           <option value="WI">WI</option>
           <option value="WV">WV</option>
           <option value="WY">WY</option>
+          <option value="AS">American Samoa</option>
+          <option value="GU">Guam</option>
+          <option value="MP">Northern Mariana Islands</option>
+          <option value="PR">Puerto Rico</option>
+          <option value="UM">United States Minor Outlying Islands</option>
+          <option value="VI">Virgin Islands</option>
         </select>
 
         <button type="submit">Go!</button>
@@ -94,12 +98,12 @@
     <script src="index.js"></script>
 
     <footer>
-      <p>
+      <h3>
         These results were collected from
         <a href="https://covidtracking.com"
           >The Covid Tracking Project by The Atlantic.</a
         >
-      </p>
+      </h3>
     </footer>
   </body>
 </html>
