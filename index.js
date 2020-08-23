@@ -1,16 +1,6 @@
 "use strict";
 
-// put your own value below!
-//const apiKey = "47cpKe28N0zP9QP2YJtAgmNiiQCdVicOMrk3f295";
 const searchURL = "https://api.covidtracking.com";
-
-const newsAPIKey = "d9b4cc352c47451eb79b896bac8295d1";
-const newsURL = "https://newsapi.org";
-
-function formatQueryParams(searchTerm) {
-  console.log(searchTerm);
-  //const stateArr = searchTerm.map();
-}
 
 function numberWithCommas(x) {
   if (!x) {
@@ -29,14 +19,11 @@ function displayResults(responseJson) {
         <li><p>Confirmed Deaths:</p>${confirmedDeath}<p>Total fatalities with confirmed Covid-19 diagnosis and the death certificate lists Covid-19 as a cause or underlying cause of death.</li>
         `
   );
+
+  $("#results").removeClass("hidden");
 }
 
-// iterate through the items array
-
-$("#results").removeClass("hidden");
-
 function getData(searchTerm) {
-  const queryString = formatQueryParams(searchTerm);
   const url = searchURL + "/v1/states/" + searchTerm + "/current.json";
 
   fetch(url)
@@ -54,46 +41,7 @@ function getData(searchTerm) {
     });
 }
 
-function formatUSParams(usSearchTerm) {
-  console.log(usSearchTerm);
-}
-
-function usData(usSearchTerm) {
-  const query = seachURL + "v1/us/" + usSearchTerm + ".json";
-
-  fetch(url).then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-  });
-}
-
-function usResults(responseJson) {
-  const usPositive = numberWithCommas(responseJson.current);
-  const usDeaths = numberWithCommas(responseJson.deaths);
-  $("#us-results").append(
-    `<li><p>US Confirmed Covid-19 Cases:</p>${usPositive}</li>
-    <li><p>US Confirmed Covid-19 Deaths:</p>${usDeaths}</li>`
-  );
-}
-
-function usResults(usSearchTerm) {
-  const usPositive = "https://api.covidtracking.com/v1/us/curent.json";
-  const usDeaths = "https://api.covidtracking.com/v1/us/death.json";
-  console.log(usPositive, usDeaths);
-}
-
-// var url =
-//   "http://newsapi.org/v2/top-headlines?" +
-//   "country=us&" +
-//   "apiKey=d9b4cc352c47451eb79b896bac8295d1";
-// var req = new Request(url);
-// fetch(req).then(function (response) {
-//   console.log(response.json());
-// });
-
 function watchForm() {
-  usData(usSearchTerm);
   $("form").submit((event) => {
     event.preventDefault();
     $("#results-list").empty();
@@ -101,4 +49,29 @@ function watchForm() {
     getData(searchTerm);
   });
 }
+
+function usResults(responseJson) {
+  //const usPositive = numberWithCommas(responseJson[0].positive);
+  //const usNegative = numberWithCommas(responseJson[0].negative);
+  //const usDeath = numberWithCommas(responseJson[0].death);
+  $("#us-results").append(
+    `<li><p>US Confirmed Covid-19 Cases:</p></li>
+      <li><p>US Confirmed Covid-19 Deaths:</p></li>`
+  );
+}
+function usData() {
+  const usURL = "https://api.covidtracking.com/v1/us/current.json";
+  fetch(usURL)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((responseJson) => {
+      usResults(responseJson);
+      // remove console.log
+      // call usResults and pass in responseJson
+    });
+}
+usData();
 $(watchForm);
