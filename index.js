@@ -51,12 +51,12 @@ function watchForm() {
 }
 
 function usResults(responseJson) {
-  //const usPositive = numberWithCommas(responseJson[0].positive);
+  const usPositive = numberWithCommas(responseJson[0].positive);
   //const usNegative = numberWithCommas(responseJson[0].negative);
-  //const usDeath = numberWithCommas(responseJson[0].death);
+  const usDeath = numberWithCommas(responseJson[0].death);
   $("#us-results").append(
-    `<li><p>US Confirmed Covid-19 Cases:</p></li>
-      <li><p>US Confirmed Covid-19 Deaths:</p></li>`
+    `<li><p>US Confirmed Covid-19 Cases: ${usPositive}</p></li>
+      <li><p>US Confirmed Covid-19 Deaths: ${usDeath}</p></li>`
   );
 }
 function usData() {
