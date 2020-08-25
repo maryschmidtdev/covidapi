@@ -4,11 +4,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(USAMAP.png);
 }
 
-.backgroung-image {
-  opacity: 0.5;
+body::after {
+  background-image: url(USAMAP.png);
+  background-repeat: no-repeat;
+  content: "";
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 h1 {
