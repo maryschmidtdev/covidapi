@@ -14,9 +14,9 @@ function displayResults(responseJson) {
   const negativeNum = numberWithCommas(responseJson.negative);
   const confirmedDeath = numberWithCommas(responseJson.deathConfirmed);
   $("#results-list").append(
-    `<li><h2>Positive Test Results:</h2> ${positiveNum}<p>Total number of poeple with confirmed or probable cases of Covid-19. A confirmed case has a positive test result, a probably case is when a patient has symptoms and has been exposed to a confirmed case.</li>
-        <li><h2>Negative Test Results:</h2> ${negativeNum}<p>Results of the PCR (molecular) test the have returned negative. This number should be considered an estimate because of the complexity of reporting it.</li>
-        <li><h2>Confirmed Deaths:</h2> ${confirmedDeath}<p>Total fatalities with confirmed Covid-19 diagnosis and the death certificate lists Covid-19 as a cause or underlying cause of death.</li>
+    `<li><h2>Positive Test Results:</h2> ${positiveNum}<p>Total number of poeple with confirmed or probable cases of Covid-19. A confirmed case has a positive test result, a probably case is when a patient has symptoms and has been exposed to a confirmed case.</li><br>
+        <li><h2>Negative Test Results:</h2> ${negativeNum}<p>Results of the PCR (molecular) test the have returned negative. This number should be considered an estimate because of the complexity of reporting it.</li><br>
+        <li><h2>Confirmed Deaths:</h2> ${confirmedDeath}<p>Total fatalities with confirmed Covid-19 diagnosis and the death certificate lists Covid-19 as a cause or underlying cause of death.</li><br>
         `
   );
 
@@ -48,8 +48,8 @@ function stateProjections(responseJson) {
   const rt = responseJson.projections.rt || "Data not available";
   const testPositivity = responseJson.metrics.testPositivity;
   $("#results-list").append(
-    `<li><h2>Rt:</h2> ${rt}<p>Rate of infection, for example, how many people the virus could spread to from one infected person.</p></li>
-          <li><h2>Test Positivity Ratio:</h2> ${testPositivity}<p>Ratio of people who test positive calculated using a 7-day rolling average.</p></li>`
+    `<li><h2>Rt:</h2> ${rt}<p>Rate of infection, for example, how many people the virus could spread to from one infected person.</p></li><br>
+          <li><h2>Test Positivity Ratio:</h2> ${testPositivity}<p>Ratio of people who test positive calculated using a 7-day rolling average.</p></li><br>`
   );
 }
 
