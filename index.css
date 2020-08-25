@@ -9,6 +9,7 @@ body {
 body::after {
   background-image: url(USAMAP.png);
   background-repeat: no-repeat;
+  background-position: center;
   content: "";
   opacity: 0.2;
   top: 0;
