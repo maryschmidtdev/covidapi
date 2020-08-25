@@ -2,6 +2,7 @@
 
 const searchURL = "https://api.covidtracking.com";
 
+//adds commas to the data
 function numberWithCommas(x) {
   if (!x) {
     return "Data not available";
@@ -9,6 +10,7 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+//HTML template for results from Covid Tracking Project API
 function displayResults(responseJson) {
   const positiveNum = numberWithCommas(responseJson.positive);
   const negativeNum = numberWithCommas(responseJson.negative);
@@ -23,6 +25,7 @@ function displayResults(responseJson) {
   $("#results").removeClass("hidden");
 }
 
+//Stringing the URL together searchTerm is the selected state
 function getData(searchTerm) {
   const url = searchURL + "/v1/states/" + searchTerm + "/current.json";
 
@@ -43,8 +46,9 @@ function getData(searchTerm) {
 
 const covidActNowApi = "https://data.covidactnow.org";
 
+//HTML template to display results from Covid Act Now API
+//Data are in properties objects of an array
 function stateProjections(responseJson) {
-  //const date = numberWithCommas(responseJson.metrics.date);
   const rt = responseJson.projections.rt || "Data not available";
   const testPositivity = responseJson.metrics.testPositivity;
   $("#results-list").append(
@@ -53,6 +57,7 @@ function stateProjections(responseJson) {
   );
 }
 
+//Stringing the URL together with the state searchTerm from above
 function projectedData(searchTerm) {
   const covidactnow =
     covidActNowApi +
@@ -84,15 +89,18 @@ function watchForm() {
   });
 }
 
+//Creating the US data that loads when the page opens at the top
+//HTML template for the US results from the Covid Tracking Project API
 function usResults(responseJson) {
   const usPositive = numberWithCommas(responseJson[0].positive);
-  //const usNegative = numberWithCommas(responseJson[0].negative);
   const usDeath = numberWithCommas(responseJson[0].death);
   $("#us-results").append(
     `<li><h2>US Confirmed Covid-19 Cases: ${usPositive}</h2></li>
       <li><h2>US Confirmed Covid-19 Deaths: ${usDeath}</h2></li>`
   );
 }
+
+//Hard coded the fetch because the data we want are properties of an object
 function usData() {
   const usURL = "https://api.covidtracking.com/v1/us/current.json";
   fetch(usURL)
