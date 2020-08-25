@@ -14,9 +14,9 @@ function displayResults(responseJson) {
   const negativeNum = numberWithCommas(responseJson.negative);
   const confirmedDeath = numberWithCommas(responseJson.deathConfirmed);
   $("#results-list").append(
-    `<li><p>Positive Test Results:</p>${positiveNum}<p>Total number of poeple with confirmed or probable cases of Covid-19. A confirmed case has a positive test result, a probably case is when a patient has symptoms and has been exposed to a confirmed case.</li>
-        <li><p>Negative Test Results:</p>${negativeNum}<p>Results of the PCR (molecular) test the have returned negative. This number should be considered an estimate because of the complexity of reporting it.</li>
-        <li><p>Confirmed Deaths:</p>${confirmedDeath}<p>Total fatalities with confirmed Covid-19 diagnosis and the death certificate lists Covid-19 as a cause or underlying cause of death.</li>
+    `<li><h2>Positive Test Results:</h2>${positiveNum}<p>Total number of poeple with confirmed or probable cases of Covid-19. A confirmed case has a positive test result, a probably case is when a patient has symptoms and has been exposed to a confirmed case.</li>
+        <li><h2>Negative Test Results:</h2>${negativeNum}<p>Results of the PCR (molecular) test the have returned negative. This number should be considered an estimate because of the complexity of reporting it.</li>
+        <li><h2>Confirmed Deaths:</h2>${confirmedDeath}<p>Total fatalities with confirmed Covid-19 diagnosis and the death certificate lists Covid-19 as a cause or underlying cause of death.</li>
         `
   );
 
@@ -55,8 +55,8 @@ function usResults(responseJson) {
   //const usNegative = numberWithCommas(responseJson[0].negative);
   const usDeath = numberWithCommas(responseJson[0].death);
   $("#us-results").append(
-    `<li><p>US Confirmed Covid-19 Cases: ${usPositive}</p></li>
-      <li><p>US Confirmed Covid-19 Deaths: ${usDeath}</p></li>`
+    `<li><h2>US Confirmed Covid-19 Cases: ${usPositive}</h2></li>
+      <li><h2>US Confirmed Covid-19 Deaths: ${usDeath}</h2></li>`
   );
 }
 function usData() {
@@ -66,12 +66,33 @@ function usData() {
       if (response.ok) {
         return response.json();
       }
+      throw new Error(response.statusText);
     })
-    .then((responseJson) => {
-      usResults(responseJson);
-      // remove console.log
-      // call usResults and pass in responseJson
+    .then((responseJson) => usResults(responseJson))
+    // remove console.log
+    // call usResults and pass in responseJson
+    .catch((err) => {
+      $("#js-error-message").text(`Data not available${err.message}`);
     });
 }
 usData();
+
+function projectedData() {
+  const covidActNowApi =
+    "https://data.covidactnow.org/latest/us/states/CA.OBSERVED_INTERVENTION.json";
+  fetch(covidActNowApi)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then((responseJson) => usResults(responseJson))
+    // remove console.log
+    // call usResults and pass in responseJson
+    .catch((err) => {
+      $("#js-error-message").text(`Data not available${err.message}`);
+    });
+}
+projectedData();
 $(watchForm);
