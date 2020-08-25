@@ -45,7 +45,7 @@ const covidActNowApi = "https://data.covidactnow.org";
 
 function stateProjections(responseJson) {
   //const date = numberWithCommas(responseJson.metrics.date);
-  const rt = responseJson.projections.rt;
+  const rt = responseJson.projections.rt || "Data not available";
   const testPositivity = responseJson.metrics.testPositivity;
   $("#results-list").append(
     `<li><h2>Rt:</h2> ${rt}<p>Rate of infection, for example, how many people the virus could spread to from one infected person.</p></li>
