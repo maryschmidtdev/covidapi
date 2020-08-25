@@ -36,6 +36,10 @@ p {
   align-items: center;
 }
 
+#results-list {
+  flex-direction: row;
+}
+
 ul {
   list-style: none;
 }
